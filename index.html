@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>INSPECTIA-Web</title>
+  <link rel="icon" href="assets/logo.png" type="image/png"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ============== LOGIN ============== -->
+  <section id="view-login" class="login-view">
+    <aside class="brand-rail">
+      <img src="assets/logo.png" alt="Logo" class="brand-logo" />
+    </aside>
+
+    <main class="content">
+      <header class="title-block">
+        <h1 class="app-title">INSPECTIA-Web</h1>
+        <p class="app-subtitle">
+          Sistema de Inspección de Tapas con IA<br/>
+          <span class="app-subsubtitle">(Envasadora - Groninger)</span>
+        </p>
+      </header>
+
+      <section class="card">
+        <form id="loginForm" class="form" novalidate>
+          <label for="usuario" class="label">Usuario</label>
+          <input type="text" id="usuario" class="input" required autocomplete="username"/>
+
+          <label for="clave" class="label">Contraseña</label>
+          <input type="password" id="clave" class="input" required autocomplete="current-password"/>
+
+          <button type="submit" class="btn-primary">INGRESAR</button>
+
+          <button type="button" id="forgotBtn" class="link-like">¿Olvidó su contraseña?</button>
+        </form>
+      </section>
+
+      <footer class="legal">
+        Marca ficticia usada únicamente con fines académicos. No representa a la empresa real.
+      </footer>
+    </main>
+  </section>
+
+  <!-- ====== TOPBAR REPETIBLE (no se muestra en Login) ====== -->
+  <header id="topbar" class="topbar hidden">
+    <div class="topbar-left">
+      <img src="assets/logo.png" alt="Logo" class="brand-logo brand-logo--sm"/>
+    </div>
+
+    <h1 id="topbar-title" class="topbar-title">Panel de Control</h1>
+
+    <div class="topbar-right">
+      <button id="userMenuBtn" class="user-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="user-avatar"></span>
+        <span id="userRoleText">Admin</span>
+        <span class="chevron">▾</span>
+      </button>
+
+      <div id="userMenu" class="user-menu">
+        <div class="user-menu-card">
+          <div class="user-menu-item">Perfil</div>
+          <button id="logoutBtn" class="user-menu-item user-menu-danger">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============== DASHBOARD ============== -->
+  <section id="view-dashboard" class="dashboard-page hidden">
+    <main class="dashboard-main">
+      <div class="actions">
+        <button id="goRegistro" class="action-card">
+          <span>Nueva<br/>Inspección</span>
+        </button>
+        <button id="goReportes" class="action-card">
+          <span>Reportes</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="legal legal--dash">
+      Marca ficticia usada únicamente con fines académicos. No representa a la empresa real.
+    </footer>
+  </section>
+
+  <!-- ============== REGISTRO DE INSPECCIÓN ============== -->
+  <section id="view-registro" class="page hidden">
+    <main class="registro-grid">
+      <div class="registro-left">
+        <label class="label label-inline">Línea de producción</label>
+        <select id="lineaSelect" class="select">
+          <option value="" selected disabled>Selecciona…</option>
+          <option value="1">Línea 1</option>
+          <option value="2">Línea 2</option>
+          <option value="3">Línea 3</option>
+        </select>
+
+        <div class="upload-box" id="dropArea">
+          <input type="file" id="fileInput" accept="image/*" class="file-input" />
+          <div id="uploadHint" class="upload-hint">Subir Foto / Imagen</div>
+          <img id="previewImg" class="preview hidden" alt="preview"/>
+        </div>
+
+        <button id="btnDetectar" class="btn-ghost-red">Detectar</button>
+      </div>
+
+      <div class="registro-right">
+        <div class="resultado-block">
+          <label class="label label-inline">Resultado:</label>
+          <input id="resultadoDetect" class="input readonly" readonly />
+        </div>
+
+        <button id="btnRegistrar" class="btn-primary big">Registrar Inspección</button>
+      </div>
+    </main>
+
+    <footer class="legal legal--dash">
+      Marca ficticia usada únicamente con fines académicos. No representa a la empresa real.
+    </footer>
+  </section>
+
+  <!-- ============== DETALLE DE INSPECCIÓN ============== -->
+  <section id="view-detalle" class="page hidden">
+    <main class="detalle-grid">
+      <div class="detalle-left">
+        <div class="foto-marco">
+          <img id="detalleFoto" alt="Foto / Imagen" class="detalle-foto"/>
+        </div>
+      </div>
+
+      <div class="detalle-right">
+        <div class="field">
+          <label>Fecha:</label>
+          <input id="det-fecha" class="input readonly" readonly />
+        </div>
+        <div class="field">
+          <label>Hora:</label>
+          <input id="det-hora" class="input readonly" readonly />
+        </div>
+        <div class="field">
+          <label>Línea:</label>
+          <input id="det-linea" class="input readonly" readonly />
+        </div>
+        <div class="field">
+          <label>Operador:</label>
+          <input id="det-operador" class="input readonly" readonly />
+        </div>
+        <div class="field">
+          <label>Resultado:</label>
+          <input id="det-resultado" class="input readonly" readonly />
+        </div>
+
+        <button id="btnFinalizar" class="btn-primary big">Finalizar</button>
+      </div>
+    </main>
+
+    <footer class="legal legal--dash">
+      Marca ficticia usada únicamente con fines académicos. No representa a la empresa real.
+    </footer>
+  </section>
+
+  <!-- ============== REPORTES ============== -->
+  <section id="view-reportes" class="page hidden">
+    <main class="reportes-grid">
+      <div class="filtros">
+        <div class="filtros-row">
+          <div class="filter-col">
+            <label class="label label-inline">Turno</label>
+            <select id="filtroTurno" class="select">
+              <option value="">Todos</option>
+              <option>Mañana</option>
+              <option>Tarde</option>
+              <option>Noche</option>
+            </select>
+          </div>
+
+          <div class="filter-col">
+            <label class="label label-inline">Línea de producción</label>
+            <select id="filtroLinea" class="select">
+              <option value="">Todas</option>
+              <option value="1">Línea 1</option>
+              <option value="2">Línea 2</option>
+              <option value="3">Línea 3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filtros-row">
+          <div class="filter-col">
+            <label class="label label-inline">Desde:</label>
+            <input type="date" id="filtroDesde" class="input"/>
+          </div>
+          <div class="filter-col">
+            <label class="label label-inline">Hasta:</label>
+            <input type="date" id="filtroHasta" class="input"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="reportes-actions">
+        <button id="btnGenerar" class="btn-primary big">Generar Reporte</button>
+        <button id="btnExportar" class="btn-primary big">Exportar Excel</button>
+      </div>
+
+      <div class="tabla-wrap">
+        <table class="tabla" id="tablaReportes">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Línea</th>
+              <th>Turno</th>
+              <th>Operador</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- filas dinámicas -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="legal legal--dash">
+      Marca ficticia usada únicamente con fines académicos. No representa a la empresa real.
+    </footer>
+  </section>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
